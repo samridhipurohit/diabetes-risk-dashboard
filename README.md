@@ -25,4 +25,4 @@ This dashboard helps identify population subgroups where diabetes prevalence is 
 - `index.Rmd`: source code for the dashboard
 - `index.html`: rendered dashboard file for GitHub Pages
 - `README.md`: project description and dashboard documentation
-- `diabetes_012_health_indicators_BRFSS2015.csv`: source dataset, if included
+- Source dataset: linked above through the UCI Machine Learning Repository

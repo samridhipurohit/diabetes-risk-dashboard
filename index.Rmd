@@ -161,6 +161,7 @@ p1 <- ggplot(
 
 ggplotly(p1, tooltip = "text", height = 500, width = 900) %>%
   layout(
+    dragmode = FALSE,
     hoverlabel = list(
       align = "left",
       bgcolor = "#f7f7f7",
@@ -168,20 +169,13 @@ ggplotly(p1, tooltip = "text", height = 500, width = 900) %>%
       font = list(color = "#333333")
     ),
     margin = list(l = 80, r = 120, b = 100, t = 80),
-    xaxis = list(fixedrange = FALSE),
-    yaxis = list(fixedrange = FALSE)
+    xaxis = list(fixedrange = TRUE),
+    yaxis = list(fixedrange = TRUE)
   ) %>%
   config(
-    displayModeBar = TRUE,
-    displaylogo = FALSE,
+    displayModeBar = FALSE,
     scrollZoom = FALSE,
-    modeBarButtonsToRemove = c(
-      "select2d",
-      "lasso2d",
-      "hoverClosestCartesian",
-      "hoverCompareCartesian",
-      "toggleSpikelines"
-    )
+    doubleClick = FALSE
   )
 ```
 </div>
@@ -309,6 +303,7 @@ p2 <- ggplot(
 
 ggplotly(p2, tooltip = "text", height = 550, width = 950) %>%
   layout(
+    dragmode = FALSE,
     hoverlabel = list(
       align = "left",
       bgcolor = "#f7f7f7",
@@ -316,20 +311,13 @@ ggplotly(p2, tooltip = "text", height = 550, width = 950) %>%
       font = list(color = "#333333")
     ),
     margin = list(l = 260, r = 120, b = 100, t = 90),
-    xaxis = list(fixedrange = FALSE),
-    yaxis = list(fixedrange = FALSE)
+    xaxis = list(fixedrange = TRUE),
+    yaxis = list(fixedrange = TRUE)
   ) %>%
   config(
-    displayModeBar = TRUE,
-    displaylogo = FALSE,
+    displayModeBar = FALSE,
     scrollZoom = FALSE,
-    modeBarButtonsToRemove = c(
-      "select2d",
-      "lasso2d",
-      "hoverClosestCartesian",
-      "hoverCompareCartesian",
-      "toggleSpikelines"
-    )
+    doubleClick = FALSE
   )
 ```
 

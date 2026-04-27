@@ -161,18 +161,20 @@ p1 <- ggplot(
 
 ggplotly(p1, tooltip = "text", height = 500, width = 900) %>%
   layout(
-    dragmode = "zoom",
     hoverlabel = list(
       align = "left",
       bgcolor = "#f7f7f7",
       bordercolor = "#cfcfcf",
       font = list(color = "#333333")
     ),
-    margin = list(l = 80, r = 120, b = 100, t = 80)
+    margin = list(l = 80, r = 120, b = 100, t = 80),
+    xaxis = list(fixedrange = FALSE),
+    yaxis = list(fixedrange = FALSE)
   ) %>%
   config(
     displayModeBar = TRUE,
     displaylogo = FALSE,
+    scrollZoom = FALSE,
     modeBarButtonsToRemove = c(
       "select2d",
       "lasso2d",
@@ -307,18 +309,20 @@ p2 <- ggplot(
 
 ggplotly(p2, tooltip = "text", height = 550, width = 950) %>%
   layout(
-    dragmode = "zoom",
     hoverlabel = list(
-    align = "left",
-    bgcolor = "#f2f2f2",
-    bordercolor = "#cfcfcf",
-    font = list(color = "#333333")
-  ),
-  margin = list(l = 260, r = 120, b = 100, t = 90)
+      align = "left",
+      bgcolor = "#f7f7f7",
+      bordercolor = "#cfcfcf",
+      font = list(color = "#333333")
+    ),
+    margin = list(l = 260, r = 120, b = 100, t = 90),
+    xaxis = list(fixedrange = FALSE),
+    yaxis = list(fixedrange = FALSE)
   ) %>%
   config(
     displayModeBar = TRUE,
     displaylogo = FALSE,
+    scrollZoom = FALSE,
     modeBarButtonsToRemove = c(
       "select2d",
       "lasso2d",

@@ -21,6 +21,31 @@ library(stringr)
 theme_set(theme_minimal(base_size = 14))
 ```
 
+```{css, echo=FALSE}
+@media (max-width: 768px) {
+  .navbar-brand {
+    white-space: normal !important;
+    line-height: 1.15;
+    font-size: 22px;
+  }
+
+  .chart-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+  }
+
+  .chart-scroll .html-widget,
+  .chart-scroll .plotly {
+    min-width: 900px !important;
+  }
+
+  .modebar {
+    display: none !important;
+  }
+}
+```
+
 ```{r data_prep, include=FALSE}
 # Load data
 df <- read_csv("diabetes_012_health_indicators_BRFSS2015.csv", show_col_types = FALSE)
@@ -40,10 +65,10 @@ brfss <- df %>%
     diabetes_yes = if_else(Diabetes_012 == 2, 1, 0),
     
     age_group = case_when(
-      Age %in% 1:2   ~ "18–29",
-      Age %in% 3:5   ~ "30–44",
-      Age %in% 6:7   ~ "45–54",
-      Age %in% 8:9   ~ "55–64",
+      Age %in% 1:2   ~ "18-29",
+      Age %in% 3:5   ~ "30-44",
+      Age %in% 6:7   ~ "45-54",
+      Age %in% 8:9   ~ "55-64",
       Age %in% 10:13 ~ "65+",
       TRUE ~ NA_character_
     ),
@@ -70,7 +95,7 @@ brfss <- df %>%
   mutate(
     age_group = factor(
       age_group,
-      levels = c("18–29", "30–44", "45–54", "55–64", "65+")
+      levels = c("18-29", "30-44", "45-54", "55-64", "65+")
     ),
     bmi_category = factor(
       bmi_category,
@@ -85,6 +110,8 @@ Main Findings
 ### Diabetes hotspots across age and BMI {data-height=550}
 
 This heatmap shows where diabetes prevalence is highest across age and BMI groups. Hover over each cell to view the diabetes prevalence and sample size.
+
+<div class="chart-scroll">
 
 ```{r heatmap_widget}
 heatmap_dat <- brfss %>%
@@ -132,13 +159,30 @@ p1 <- ggplot(
     legend.text = element_text(size = 11)
   )
 
-ggplotly(p1, tooltip = "text", height = 500) %>%
+ggplotly(p1, tooltip = "text", height = 500, width = 900) %>%
   layout(
-    hoverlabel = list(align = "left"),
+    dragmode = "zoom",
+    hoverlabel = list(
+      align = "left",
+      bgcolor = "#f7f7f7",
+      bordercolor = "#cfcfcf",
+      font = list(color = "#333333")
+    ),
     margin = list(l = 80, r = 120, b = 100, t = 80)
   ) %>%
-  config(displayModeBar = TRUE)
+  config(
+    displayModeBar = TRUE,
+    displaylogo = FALSE,
+    modeBarButtonsToRemove = c(
+      "select2d",
+      "lasso2d",
+      "hoverClosestCartesian",
+      "hoverCompareCartesian",
+      "toggleSpikelines"
+    )
+  )
 ```
+</div>
 
 ### Key takeaway
 
@@ -152,12 +196,14 @@ This dashboard helps identify population subgroups where diabetes prevalence is 
 Risk Factors
 =====================================
 
-### Risk-factor diabetes gaps among adults aged 55–64 with Obese I BMI {data-height=600}
+### Risk-factor diabetes gaps among adults aged 55-64 with Obese I BMI {data-height=600}
 
 This chart compares diabetes prevalence between people with and without each risk factor in one high-risk subgroup. Hover over each point to view the prevalence gap, factor prevalence, and sample sizes.
 
+<div class="chart-scroll">
+
 ```{r risk_factor_widget}
-selected_age <- "55–64"
+selected_age <- "55-64"
 selected_bmi <- "Obese I"
 
 subgroup <- brfss %>%
@@ -242,7 +288,7 @@ p2 <- ggplot(
   ) +
   geom_point(size = 3.5) +
   scale_color_manual(
-    values = c("Largest gap" = "#2c7fb8", "Other" = "#9e9e9e")
+    values = c("Largest gap" = "#2c7fb8", "Other" = "#bdbdbd")
   ) +
   labs(
     title = "Diabetes Prevalence Gaps by Risk Factor",
@@ -259,17 +305,35 @@ p2 <- ggplot(
     panel.grid.major.y = element_blank()
   )
 
-ggplotly(p2, tooltip = "text", height = 550) %>%
+ggplotly(p2, tooltip = "text", height = 550, width = 950) %>%
   layout(
-    hoverlabel = list(align = "left"),
-    margin = list(l = 260, r = 120, b = 100, t = 90)
+    dragmode = "zoom",
+    hoverlabel = list(
+    align = "left",
+    bgcolor = "#f2f2f2",
+    bordercolor = "#cfcfcf",
+    font = list(color = "#333333")
+  ),
+  margin = list(l = 260, r = 120, b = 100, t = 90)
   ) %>%
-  config(displayModeBar = TRUE)
+  config(
+    displayModeBar = TRUE,
+    displaylogo = FALSE,
+    modeBarButtonsToRemove = c(
+      "select2d",
+      "lasso2d",
+      "hoverClosestCartesian",
+      "hoverCompareCartesian",
+      "toggleSpikelines"
+    )
+  )
 ```
+
+</div>
 
 ### Key takeaway
 
-Within adults aged 55–64 in the Obese I BMI category, high blood pressure, difficulty walking, and high cholesterol show some of the largest positive diabetes prevalence gaps. These patterns suggest that diabetes burden clusters with cardiovascular and mobility-related risk factors.
+Within adults aged 55-64 in the Obese I BMI category, high blood pressure, difficulty walking, and high cholesterol show some of the largest positive diabetes prevalence gaps. These patterns suggest that diabetes burden clusters with cardiovascular and mobility-related risk factors.
 
 ### How to interpret the chart
 
@@ -281,7 +345,7 @@ Dataset
 
 ### Dataset description
 
-This dashboard uses the CDC Diabetes Health Indicators dataset, derived from the 2015 Behavioral Risk Factor Surveillance System. The dataset includes 253,680 survey responses from U.S. adults and contains health, lifestyle, healthcare access, and demographic indicators related to diabetes status. Data were collected through the CDC’s BRFSS, a population-based health survey. The study population includes adult survey respondents in the United States in 2015. The dashboard focuses on diabetes prevalence patterns across age, BMI, and selected health risk factors.
+This dashboard uses the [CDC Diabetes Health Indicators dataset](https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators), derived from the 2015 Behavioral Risk Factor Surveillance System. The dataset includes 253,680 survey responses from U.S. adults and contains health, lifestyle, healthcare access, and demographic indicators related to diabetes status. Data were collected through the CDC’s BRFSS, a population-based health survey. The study population includes adult survey respondents in the United States in 2015. The dashboard focuses on diabetes prevalence patterns across age, BMI, and selected health risk factors.
 
 ### Real-world impact
 

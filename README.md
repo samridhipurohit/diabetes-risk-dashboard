@@ -1,6 +1,6 @@
 # Diabetes Risk Dashboard
 
-This dashboard explores diabetes prevalence patterns using the CDC Diabetes Health Indicators dataset derived from the 2015 Behavioral Risk Factor Surveillance System.
+This dashboard uses the [CDC Diabetes Health Indicators dataset](https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators), derived from the Behavioral Risk Factor Surveillance System.
 
 ## Live Dashboard
 
@@ -10,7 +10,7 @@ https://samridhipurohit.github.io/diabetes-risk-dashboard/
 
 ## Data Source
 
-This project uses `diabetes_012_health_indicators_BRFSS2015.csv`, a cleaned version of the CDC BRFSS 2015 diabetes health indicators dataset. The dataset includes 253,680 U.S. adult survey responses and contains health, lifestyle, healthcare access, and demographic indicators related to diabetes status.
+This project uses [`diabetes_012_health_indicators_BRFSS2015.csv`](https://archive.ics.uci.edu/dataset/891/cdc+diabetes+health+indicators), a cleaned version of the CDC Diabetes Health Indicators dataset derived from the Behavioral Risk Factor Surveillance System. The dataset includes 253,680 U.S. adult survey responses and contains health, lifestyle, healthcare access, and demographic indicators related to diabetes status.
 
 ## Dashboard Contents
 
